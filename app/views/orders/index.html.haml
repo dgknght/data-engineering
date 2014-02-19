@@ -1,0 +1,25 @@
+%h2 Orders
+
+=form_for(@processor) do |f|
+  =f.label "File"
+  %br
+  =f.file_field
+
+%table.orders
+  %tr
+    %th Purchaser name
+    %th Item Description
+    %th Item Price
+    %th Purchase count
+    %th Purchase amount
+    %th Merchant name
+    %th Merchant address
+  -@orders.each do |order|
+    %tr
+      %td= order.purchaser.full_name
+      %td= order.item_description
+      %td= order.item_price
+      %td= order.purchase_count
+      %td= order.purchase_amount
+      %td= order.merchant.name
+      %td= order.merchant.address
