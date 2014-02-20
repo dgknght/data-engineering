@@ -3,7 +3,6 @@ Feature: Upload a file containing orders
   In order to store order information from an external source,
   I need to be able to upload the information in a tab-delimited file
 
-  @wip
   Scenario: A user uploads a file containing order information
     When I am on the orders page
     And I attach file "example_input.tab" for "File"
