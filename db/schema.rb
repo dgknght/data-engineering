@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140219222855) do
+ActiveRecord::Schema.define(version: 20140219223327) do
 
   create_table "merchants", force: true do |t|
     t.string   "name"
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 20140219222855) do
   end
 
   add_index "merchants", ["name"], name: "index_merchants_on_name", unique: true
+
+  create_table "orders", force: true do |t|
+    t.integer  "purchaser_id"
+    t.integer  "merchant_id"
+    t.string   "item_description"
+    t.decimal  "item_price"
+    t.integer  "purchase_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "purchasers", force: true do |t|
     t.string   "first_name"

@@ -1,7 +1,12 @@
 class OrdersController < ApplicationController
   def index
-    @orders = []
+    @orders = Order.all
+    @total = @orders.reduce(0) { |total, order| total += order.purchase_amount } 
+  end
 
-    @processor = OrderFileProcessor.new
+  def upload
+    processor = OrderFileProcessor.new(params[:upload])
+    processor.process
+    redirect_to orders_path
   end
 end

@@ -6,12 +6,17 @@ When /^I click "([^"]+)"$/ do |locator|
   click_on(locator)
 end
 
-When /^I attach file "([^"]+)" for "([^"]+)"$/ do |locator, file_path|
-  attach_file(locator, file_path)
+When /^I attach file "([^"]+)" for "([^"]+)"$/ do |file_name, locator|
+  full_path = "#{::Rails.root}/spec/fixtures/#{file_name}"
+
+  puts "full_path=#{full_path}"
+
+  attach_file(locator, full_path)
 end
 
 Then /^I should see the following (.+) table$/ do |identifier, expected|
   locator = "table.#{identifier}"
-  actual = find(locator)
+  html_table = find(locator)
+  actual = parse_table(html_table)
   expected.diff!(actual)
 end

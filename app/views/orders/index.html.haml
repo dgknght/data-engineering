@@ -1,25 +1,36 @@
 %h2 Orders
 
-=form_for(@processor) do |f|
-  =f.label "File"
+=form_tag(upload_orders_path, method: :post, multipart: true) do
+  =label_tag 'upload[file]', 'File'
   %br
-  =f.file_field
+  =file_field_tag 'upload[file]'
+
+  .actions
+    =submit_tag 'Upload'
 
 %table.orders
   %tr
     %th Purchaser name
-    %th Item Description
-    %th Item Price
-    %th Purchase count
-    %th Purchase amount
+    %th Item description
+    %th.number_cell Item price
+    %th.number_cell Purchase count
+    %th.number_cell Purchase amount
     %th Merchant name
     %th Merchant address
   -@orders.each do |order|
     %tr
       %td= order.purchaser.full_name
       %td= order.item_description
-      %td= order.item_price
-      %td= order.purchase_count
-      %td= order.purchase_amount
+      %td.number_cell= number_to_currency(order.item_price, unit: '')
+      %td.number_cell= order.purchase_count
+      %td.number_cell= number_to_currency(order.purchase_amount, unit: '')
       %td= order.merchant.name
       %td= order.merchant.address
+  %tr.total_row
+    %td Total
+    %td &nbsp;
+    %td &nbsp;
+    %td &nbsp;
+    %td.number_cell= number_to_currency(@total, unit: '')
+    %td &nbsp;
+    %td &nbsp;

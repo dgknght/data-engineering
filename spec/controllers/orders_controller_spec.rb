@@ -9,4 +9,11 @@ describe OrdersController do
     end
   end
 
+  describe 'POST :upload' do
+    let (:file) { Rack::Test::UploadedFile.new("#{::Rails.root}/spec/fixtures/single_order.tab") }
+
+    it 'should rediret to the index page' do
+      post :upload, upload: { file: file }
+    end
+  end
 end

@@ -17,9 +17,6 @@ describe OrderFileProcessor do
         processor = OrderFileProcessor.new(file: file)
         expect { processor.process }.to change(Order, :count).by(1)
       end
-
-      it 'should create the purchaser if they do not exist'
-      it 'should create the merchange if it does not exist'
     end
   end
 end
