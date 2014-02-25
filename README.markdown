@@ -41,3 +41,40 @@ Evaluation of your submission will be based on the following criteria. Additiona
 1. Did your application fulfill the basic requirements?
 1. Did you document the method for setting up and running your application?
 1. Did you follow the instructions for submission?
+
+* * * 
+
+## Set-up
+In order to run the submission, a few steps are necessary to get things going. These instructions assume you are using RVM to manage ruby versions. Open a terminal and perform the following steps:
+
+Make sure you have the correct version of ruby (2.0) installed and selected.
+
+    rvm use 2.0
+    
+Create a gemset for the project.
+
+    rvm gemset use data-engineering --create
+    
+Migrate the database schema. In a terminal, execute:
+
+    rake db:migrate
+    rake db:migrate RAILS_ENV=test
+
+### Tests
+
+#### Cucumber
+The integration tests are written in cucumber. To execute them, enter the following command:
+
+    cucumber
+
+#### RSpec
+The unit tests are written in RSpec. To execute them, enter the following command:
+
+    rspec spec/
+
+### Running the site
+To test the site manually, use the web hosting service build into rails be executing the following command:
+
+    rails s
+
+Open a browser and enter the url http://localhost:3000/orders.
